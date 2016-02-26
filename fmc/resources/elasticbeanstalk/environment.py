@@ -25,8 +25,8 @@ class Environment(ResourceBase):
                 }
 
     def __repr__(self):
-        return "<ElasitcBeanstalk.Environment: {0}>".format(
-                self.ApplicationName
+        return "<ElasticBeanstalk.Environment: {0}>".format(
+                self.LogicalID
                 )
 
     def representation(self):
