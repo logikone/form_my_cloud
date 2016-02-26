@@ -1,4 +1,4 @@
-from cf.resources.base import ResourceBase
+from fmc.resources.base import ResourceBase
 
 class Environment(ResourceBase):
     def __init__(self, LogicalID, ApplicationName, Properties=None):

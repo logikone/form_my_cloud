@@ -1,4 +1,4 @@
-from cf.resources.elasticbeanstalk import (
+from fmc.resources.elasticbeanstalk import (
         Environment as EBEnvironment,
         Application as EBApplication,
         ApplicationVersion as EBApplicationVersion,

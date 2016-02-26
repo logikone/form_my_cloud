@@ -1,7 +1,7 @@
 import json
 from datetime import datetime
 
-from cf.base import Base
+from fmc.base import Base
 
 class Version(Base):
 

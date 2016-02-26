@@ -1,4 +1,4 @@
-from cf.base import Base
+from fmc.base import Base
 
 class ResourceBase(Base):
     pass

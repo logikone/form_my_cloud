@@ -2,7 +2,7 @@ import sys
 import botocore.session
 import botocore.exceptions
 
-from cf.base import Base
+from fmc.base import Base
 
 class Client(Base):
     def __init__(self):

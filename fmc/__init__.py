@@ -1,15 +1,15 @@
-from cf.resources import (
+from fmc.resources import (
         EBEnvironment,
         EBApplication,
         EBApplicationVersion,
         EBConfigurationTemplate,
         )
 
-from cf.format import (
+from fmc.format import (
         Version
         )
 
-from cf.client import (
+from fmc.client import (
         Client
         )
 

@@ -1,4 +1,4 @@
-from cf.resources.base import ResourceBase
+from fmc.resources.base import ResourceBase
 
 class ConfigurationTemplate(ResourceBase):
     pass
