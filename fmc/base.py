@@ -1,7 +1,7 @@
 import json
 import collections
 
-class ResourceBase(object):
+class Base(object):
     def __init__(self):
         pass
 
@@ -21,3 +21,5 @@ class ResourceBase(object):
             else:
                 d[k] = u[k]
         return d
+
+#! vim: ts=4 sw=4 ft=python expandtab:
