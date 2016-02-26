@@ -1,7 +1,14 @@
 from fmc.resources.base import ResourceBase
+from fmc.exceptions import MissingArgument
 
 class Environment(ResourceBase):
-    def __init__(self, LogicalID, ApplicationName, Properties=None):
+    def __init__(self, LogicalID=None, ApplicationName=None, Properties=None):
+        if not LogicalID:
+            raise MissingArgument("LogicalID")
+
+        if not ApplicationName:
+            raise MissingArgument("ApplicationName")
+
         self.type = "AWS::ElasticBeanstalk::Environment"
         self.LogicalID = LogicalID
         self.ApplicationName = ApplicationName
