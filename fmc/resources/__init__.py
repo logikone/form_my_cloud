@@ -1,13 +1,9 @@
-from fmc.resources.elasticbeanstalk import (
-        Environment as EBEnvironment,
-        Application as EBApplication,
-        ApplicationVersion as EBApplicationVersion,
-        ConfigurationTemplate as EBConfigurationTemplate,
+from fmc.resources import (
+        elasticbeanstalk as ElasticBeanstalk
         )
 
 __all__ = [
-        EBEnvironment,
-        EBApplication,
-        EBApplicationVersion,
-        EBConfigurationTemplate,
+        ElasticBeanstalk
         ]
+
+#! vim: ts=4 sw=4 ft=python expandtab:

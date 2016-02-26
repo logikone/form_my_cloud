@@ -1,8 +1,5 @@
 from fmc.resources import (
-        EBEnvironment,
-        EBApplication,
-        EBApplicationVersion,
-        EBConfigurationTemplate,
+        ElasticBeanstalk
         )
 
 from fmc.format import (
@@ -17,9 +14,14 @@ def client():
     return Client
 
 def resource(name):
-    if name == "EBEnvironment":
-        return EBEnvironment
+    if name == "ElasticBeanstalk":
+        return ElasticBeanstalk
+
+    raise ValueError("Unknown Resource Type: {0}".format(
+        name))
 
 def format(name):
     if name == "Version":
         return Version
+
+#! vim: ts=4 sw=4 ft=python expandtab:
