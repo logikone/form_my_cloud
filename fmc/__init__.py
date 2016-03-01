@@ -6,12 +6,14 @@ from fmc.format import (
         Version
         )
 
-from fmc.client import (
-        Client
-        )
+from fmc.client import Client
+from fmc.description import Description
 
 def client():
     return Client
+
+def description(description):
+    return Description(description)
 
 def resource(name):
     if name == "ElasticBeanstalk":
