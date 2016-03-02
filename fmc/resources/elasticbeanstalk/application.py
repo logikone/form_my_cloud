@@ -33,6 +33,3 @@ class Application(ResourceBase):
         return "<ElasticBeanstalk.Application: {0}>".format(
                 self.LogicalID
                 )
-
-    def representation(self):
-        return self.doc
