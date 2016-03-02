@@ -17,7 +17,7 @@ def description(description):
     return Description(description)
 
 def metadata(**kwargs):
-    return MetaData(kwargs)
+    return MetaData(**kwargs)
 
 def resource(name):
     if name == "ElasticBeanstalk":
