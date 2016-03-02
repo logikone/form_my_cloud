@@ -10,7 +10,7 @@ class Application(ResourceBase):
         self.ApplicationName = ApplicationName
         self.Description = Description
         self.Properties = {}
-        self.type = "AWS:::ElasticBeanstalk::Application"
+        self.type = "AWS::ElasticBeanstalk::Application"
         self.doc = {
                 "Resources": {
                     self.LogicalID: {

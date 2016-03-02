@@ -2,7 +2,7 @@ from fmc.resources.base import ResourceBase
 from fmc.exceptions import MissingArgument
 
 class Environment(ResourceBase):
-    def __init__(self, LogicalID=None, ApplicationName=None, Properties=None):
+    def __init__(self, LogicalID=None, ApplicationName=None, DependsOn=None, **kwargs):
         if not LogicalID:
             raise MissingArgument("LogicalID")
 
@@ -12,11 +12,12 @@ class Environment(ResourceBase):
         self.type = "AWS::ElasticBeanstalk::Environment"
         self.LogicalID = LogicalID
         self.ApplicationName = ApplicationName
-        self.User_Properties = Properties
+        self.User_Properties = kwargs
+        self.DependsOn = DependsOn
         self.Properties = {
                 "Resources":{
                     self.LogicalID: {
-                        "Properties": Properties
+                        "Properties": self.User_Properties
                         }
                     }
                 }
@@ -30,6 +31,8 @@ class Environment(ResourceBase):
                         }
                     }
                 }
+        if self.DependsOn:
+            self.doc_base["Resources"][self.LogicalID]["DependsOn"] = self.DependsOn
 
     def __repr__(self):
         return "<ElasticBeanstalk.Environment: {0}>".format(
