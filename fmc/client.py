@@ -10,16 +10,9 @@ class Client(Base):
         self.cf_client = session.create_client("cloudformation")
 
     def _validate_template(self, template):
-        try:
-            valid = self.cf_client.validate_template(
-                    TemplateBody = template
-                    )
-        except botocore.exceptions.ClientError as e:
-            sys.stderr.write("ERROR: {0}".format(str(e)))
-            raise
-        except Exception as e:
-            sys.stderr.write(str(e))
-            raise
+        valid = self.cf_client.validate_template(
+                TemplateBody = template
+                )
 
         return valid
 
@@ -57,30 +50,19 @@ class Client(Base):
                 )
 
         if template_valid:
-            try:
-                response = self.cf_client.create_stack(
-                        StackName = stack.name,
-                        TemplateBody = self.serialize(combined_dict),
-                        )
-            except Exception as e:
-                print str(e)
-                sys.exit(1)
+            response = self.cf_client.create_stack(
+                    StackName = stack.name,
+                    TemplateBody = self.serialize(combined_dict),
+                    )
 
         return response
 
     @classmethod
     def delete_stack(Class, stack):
         self = Class()
-        try:
-            return self.cf_client.delete_stack(
-                    StackName = stack.name
-                    )
-        except botocore.exceptions.ClientError as e:
-            sys.stderr.write("ERROR: {0}".format(str(e)))
-            raise
-        except Exception as e:
-            sys.stderr.write(str(e))
-            raise
+        return self.cf_client.delete_stack(
+                StackName = stack.name
+                )
 
     @classmethod
     def stack_representation(Class, stack):

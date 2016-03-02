@@ -42,17 +42,27 @@ def main():
     try:
         stack = imp.load_source("stack", options.stack)
     except Exception as e:
-        print str(e)
-        sys.exit()
+        sys.exit(e)
 
     if options.operation == "representation":
-        print _dumps(client.stack_representation(stack))
+        try:
+            print _dumps(client.stack_representation(stack))
+        except Exception as e:
+            sys.exit(e)
 
     if options.operation == "create":
-        print _dumps(client.create_stack(stack))
+        try:
+            print _dumps(client.create_stack(stack))
+        except Exception as e:
+            sys.exit(e)
 
     if options.operation == "validate":
-        print _dumps(client.validate_stack(stack))
+        try:
+            print _dumps(client.validate_stack(stack))
+        except Exception as e:
+            sys.exit(e)
 
 if __name__ == "__main__":
     main()
+
+#! vim: ts=4 sw=4 ft=python expandtab:
