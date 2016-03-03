@@ -16,7 +16,7 @@ def get_options():
     parent_parser = argparse.ArgumentParser()
 
     shared_args = argparse.ArgumentParser(add_help=False)
-    shared_args.add_argument("--stack", "-s", type=str, required=True,
+    shared_args.add_argument("stack", type=str,
             help="Path to stack file realive to cwd.")
 
     subparsers = parent_parser.add_subparsers(dest="operation")
