@@ -24,6 +24,7 @@ def get_options():
     representation = subparsers.add_parser("representation", parents=[shared_args])
     validate = subparsers.add_parser("validate", parents=[shared_args])
     create = subparsers.add_parser("create", parents=[shared_args])
+    delete = subparsers.add_parser("delete", parents=[shared_args])
 
     options = parent_parser.parse_args()
 
@@ -59,6 +60,12 @@ def main():
     if options.operation == "validate":
         try:
             print _dumps(client.validate_stack(stack))
+        except Exception as e:
+            sys.exit(e)
+
+    if options.operation == "delete":
+        try:
+            print _dumps(client.delete_stack(stack))
         except Exception as e:
             sys.exit(e)
 
