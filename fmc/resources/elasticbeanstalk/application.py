@@ -10,11 +10,11 @@ class Application(ResourceBase):
         self.ApplicationName = ApplicationName
         self.Description = Description
         self.Properties = {}
-        self.type = "AWS::ElasticBeanstalk::Application"
+        self.Type = "AWS::ElasticBeanstalk::Application"
         self.doc = {
                 "Resources": {
                     self.LogicalID: {
-                        "Type": self.type,
+                        "Type": self.Type,
                         "Properties": self.Properties
                         }
                     }
@@ -28,8 +28,3 @@ class Application(ResourceBase):
         if len(self.Properties.keys()) == 0:
             print self.doc
             self.doc["Resources"][self.LogicalID].pop("Properties")
-
-    def __repr__(self):
-        return "<ElasticBeanstalk.Application: {0}>".format(
-                self.LogicalID
-                )

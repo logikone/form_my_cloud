@@ -9,7 +9,7 @@ class ConfigurationTemplate(ResourceBase):
             ])
     def __init__(self, LogicalID=None, ApplicationName=None, DependsOn=None, **kwargs):
 
-        self.type = "AWS::ElasticBeanstalk::ConfigurationTemplate"
+        self.Type = "AWS::ElasticBeanstalk::ConfigurationTemplate"
         self.LogicalID = LogicalID
         self.ApplicationName = ApplicationName
         self.User_Properties = kwargs
@@ -21,33 +21,22 @@ class ConfigurationTemplate(ResourceBase):
                         }
                     }
                 }
-        self.doc_base = {
+        self.doc = {
                 "Resources": {
                     self.LogicalID: {
-                        "Type": self.type,
+                        "Type": self.Type,
                         "Properties": {
                             "ApplicationName": self.ApplicationName,
                             }
                         }
                     }
                 }
+
         if self.DependsOn:
-            self.doc_base["Resources"][self.LogicalID]["DependsOn"] = self.DependsOn
+            self.doc["Resources"][self.LogicalID]["DependsOn"] = self.DependsOn
 
-
-    def __repr__(self):
-        return "<ElasticBeanstalk.ConfigurationTemplate: {0}".format(
-                self.LogicalID
-                )
-
-    def representation(self):
         if self.User_Properties:
-            doc = self._update_dict(
-                    self.doc_base,
+            self._update_dict(
+                    self.doc,
                     self.Properties,
                     )
-        else:
-            doc = self.doc_base
-
-        return doc
-

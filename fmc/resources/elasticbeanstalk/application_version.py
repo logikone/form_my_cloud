@@ -11,7 +11,7 @@ class ApplicationVersion(ResourceBase):
     def __init__(self, LogicalID=None, ApplicationName=None,
             SourceBundle=None, Description=None, DependsOn=None):
 
-        self.type = "AWS::ElasticBeanstalk::ApplicationVersion"
+        self.Type = "AWS::ElasticBeanstalk::ApplicationVersion"
         self.LogicalID = LogicalID
         self.ApplicationName = ApplicationName
         self.SourceBundle = SourceBundle
@@ -25,7 +25,7 @@ class ApplicationVersion(ResourceBase):
         self.doc = {
                 "Resources": {
                     self.LogicalID: {
-                        "Type": self.type,
+                        "Type": self.Type,
                         "Properties": self.Properties
                         }
                     }
@@ -40,8 +40,3 @@ class ApplicationVersion(ResourceBase):
         if len(self.Properties.keys()) == 0:
             print self.doc
             self.doc["Resources"][self.LogicalID].pop("Properties")
-
-    def __repr__(self):
-        return "<ElasticBeanstalk.ApplicationVersion: {0}>".format(
-                self.LogicalID
-                )

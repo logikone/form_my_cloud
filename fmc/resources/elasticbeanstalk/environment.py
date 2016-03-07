@@ -9,7 +9,7 @@ class Environment(ResourceBase):
         ])
     def __init__(self, LogicalID=None, ApplicationName=None, DependsOn=None, **kwargs):
 
-        self.type = "AWS::ElasticBeanstalk::Environment"
+        self.Type = "AWS::ElasticBeanstalk::Environment"
         self.LogicalID = LogicalID
         self.ApplicationName = ApplicationName
         self.User_Properties = kwargs
@@ -21,10 +21,10 @@ class Environment(ResourceBase):
                         }
                     }
                 }
-        self.doc_base = {
+        self.doc = {
                 "Resources": {
                     self.LogicalID: {
-                        "Type": self.type,
+                        "Type": self.Type,
                         "Properties": {
                             "ApplicationName": self.ApplicationName,
                             }
@@ -32,22 +32,12 @@ class Environment(ResourceBase):
                     }
                 }
         if self.DependsOn:
-            self.doc_base["Resources"][self.LogicalID]["DependsOn"] = self.DependsOn
+            self.doc["Resources"][self.LogicalID]["DependsOn"] = self.DependsOn
 
-    def __repr__(self):
-        return "<ElasticBeanstalk.Environment: {0}>".format(
-                self.LogicalID
-                )
-
-    def representation(self):
         if self.User_Properties:
             doc = self._update_dict(
-                    self.doc_base,
+                    self.doc,
                     self.Properties,
                     )
-        else:
-            doc = self.doc_base
-
-        return doc
 
 #! vim: ts=4 sw=4 ft=python expandtab:
