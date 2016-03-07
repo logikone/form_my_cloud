@@ -18,6 +18,59 @@ metadata = fmc.metadata(
             },
         )
 
+iam = fmc.resource("IAM")
+
+iam_role = iam.Role(
+        LogicalID = "TestIAMRole",
+        AssumeRolePolicyDocument = {
+            "Statement": {
+                "Effect": "Allow",
+                "Principal": {
+                    "Service": [
+                        "ec2.amazonaws.com",
+                        ],
+                    },
+                "Action": [
+                    "sts:AssumeRole",
+                    ],
+                },
+            },
+        Path = "/test/",
+        )
+
+iam_instance_profile = iam.InstanceProfile(
+        LogicalID = "TestIAMInstanceProfile",
+        Path = "/test/",
+        Roles = [
+            {
+                "Ref": iam_role.LogicalID,
+                },
+            ],
+        )
+
+iam_policy = iam.Policy(
+        LogicalID = "TestIAMPolicy",
+        PolicyDocument = {
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Action": [
+                        "*",
+                        ],
+                    "Resource": [
+                        "*",
+                        ],
+                    },
+                ],
+            },
+        PolicyName = "TestIAMPolicy",
+        Roles = [
+            {
+                "Ref": iam_role.LogicalID
+                }
+            ]
+        )
+
 eb = fmc.resource("ElasticBeanstalk")
 eb_app = eb.Application(
         LogicalID = "testapp",
@@ -67,6 +120,9 @@ eb_env = eb.Environment(
 stack = [
         description,
         metadata,
+        iam_role,
+        iam_policy,
+        iam_instance_profile,
         eb_env,
         eb_app,
         eb_template,

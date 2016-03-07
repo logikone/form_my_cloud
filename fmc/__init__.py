@@ -1,5 +1,6 @@
 from fmc.resources import (
-        ElasticBeanstalk
+        ElasticBeanstalk,
+        IAM,
         )
 
 from fmc.format import (
@@ -22,6 +23,8 @@ def metadata(**kwargs):
 def resource(name):
     if name == "ElasticBeanstalk":
         return ElasticBeanstalk
+    if name == "IAM":
+        return IAM
 
     raise ValueError("Unknown Resource Type: {0}".format(
         name))
