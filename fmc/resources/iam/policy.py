@@ -1,29 +1,21 @@
 from fmc.resources.base import ResourceBase
-from fmc.exceptions import MissingArgument, MissingOneOf
+from fmc.decorators import RequiredArguments, RequiresOneOf
 
 class Policy(ResourceBase):
+
+    @RequiredArguments([
+        "LogicalID",
+        "PolicyDocument",
+        "PolicyName"
+        ])
+    @RequiresOneOf([
+        "Groups",
+        "Roles",
+        "Users"
+        ])
     def __init__(self, LogicalID=None, Groups=None, PolicyDocument=None,
             PolicyName=None, Roles=None, Users=None):
 
-        if not LogicalID:
-            raise MissingArgument("LogicalID")
-    
-        if not PolicyDocument:
-            raise MissingArgument("PolicyDocument")
-    
-        if not PolicyName:
-            raise MissingArgument("PolicyName")
-
-        if not Groups and not Roles and not Users:
-            raise MissingOneOf(
-                    [
-                        "Groups",
-                        "Roles",
-                        "Users",
-                        ],
-                    "IAM.Policy",
-                    )
-    
         self.Type = "AWS::IAM::Policy"
         self.LogicalID = LogicalID
         self.Groups = Groups
