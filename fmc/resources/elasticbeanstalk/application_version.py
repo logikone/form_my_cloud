@@ -1,17 +1,15 @@
 from fmc.resources.base import ResourceBase
-from fmc.exceptions import MissingArgument
+from fmc.decorators import RequiredArguments
 
 class ApplicationVersion(ResourceBase):
+
+    @RequiredArguments([
+        "LogicalID",
+        "ApplicationName",
+        "SourceBundle"
+        ])
     def __init__(self, LogicalID=None, ApplicationName=None,
             SourceBundle=None, Description=None, DependsOn=None):
-        if not LogicalID:
-            raise MissingArument("LogicalID")
-
-        if not ApplicationName:
-            raise MissingArgument("ApplicationName")
-
-        if not SourceBundle:
-            raise MissingArgument("SourceBundle")
 
         self.type = "AWS::ElasticBeanstalk::ApplicationVersion"
         self.LogicalID = LogicalID

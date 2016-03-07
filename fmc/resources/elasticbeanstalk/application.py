@@ -1,10 +1,10 @@
 from fmc.resources.base import ResourceBase
-from fmc.exceptions import MissingArgument
+from fmc.decorators import RequiredArguments
 
 class Application(ResourceBase):
+
+    @RequiredArguments(["LogicalID"])
     def __init__(self, LogicalID=None, ApplicationName=None, Description=None):
-        if not LogicalID:
-            raise MissingArument("LogicalID")
 
         self.LogicalID = LogicalID
         self.ApplicationName = ApplicationName
