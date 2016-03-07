@@ -1,14 +1,14 @@
 from fmc.resources.base import ResourceBase
-from fmc.exceptions import MissingArgument
+from fmc.decorators import RequiredArguments
 
 class Role(ResourceBase):
+
+    @RequiredArguments([
+        "LogicalID",
+        "AssumeRolePolicyDocument"
+        ])
     def __init__(self, LogicalID=None, AssumeRolePolicyDocument=None,
             ManagedPolicyArns=None, Path=None, Policies=None):
-        if not LogicalID:
-            raise MissingArgument("LogicalID")
-
-        if not AssumeRolePolicyDocument:
-            raise MissingArgument("AssumeRolePolicyDocument")
 
         self.Type = "AWS::IAM::Role"
         self.LogicalID = LogicalID
