@@ -44,6 +44,13 @@ class Client(Base):
     def create_stack(Class, stack):
         self = Class()
         combined_dict = self._combine_dicts(stack.stack)
+        Capabilities = []
+
+        for s in stack.stack:
+            try:
+                Capabilities.append(s.Capabilities)
+            except:
+                pass
 
         template_valid = self._validate_template(
                 self.serialize(combined_dict)
@@ -53,6 +60,7 @@ class Client(Base):
             response = self.cf_client.create_stack(
                     StackName = stack.name,
                     TemplateBody = self.serialize(combined_dict),
+                    Capabilities = Capabilities,
                     )
 
         return response
