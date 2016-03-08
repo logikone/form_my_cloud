@@ -6,6 +6,7 @@ from fmc.decorators import (
         )
 
 class Environment(ResourceBase):
+    Type = "AWS::ElasticBeanstalk::Environment"
 
     @RequiredArguments([
         "LogicalID"
@@ -25,21 +26,6 @@ class Environment(ResourceBase):
         "VersionLabel"
         ])
     def __init__(self, **kwargs):
-
-        self.Type = "AWS::ElasticBeanstalk::Environment"
-        self.LogicalID = kwargs["LogicalID"]
-        self.ApplicationName = kwargs["ApplicationName"]
-        self.Properties = kwargs["Properties"]
-        self.doc = {
-                "Resources": {
-                    self.LogicalID: {
-                        "Type": self.Type,
-                        "Properties": self.Properties
-                        }
-                    }
-                }
-
-        if "DependsOn" in kwargs:
-            self.doc["Resources"][self.LogicalID]["DependsOn"] = kwargs["DependsOn"]
+        super(Environment, self).__init__(**kwargs)
 
 #! vim: ts=4 sw=4 ft=python expandtab:

@@ -1,28 +1,19 @@
 from fmc.resources.base import ResourceBase
-from fmc.decorators import RequiredArguments
+from fmc.decorators import (
+        RequiredArguments,
+        RequiredProperties
+        )
 
 class InstanceProfile(ResourceBase):
+    Type = "AWS::IAM::InstanceProfile"
 
     @RequiredArguments([
-        "LogicalID",
+        "LogicalID"
+        ])
+    @RequiredProperties([
         "Path",
         "Roles"
         ])
-    def __init__(self, LogicalID=None, Path=None, Roles=None):
+    def __init__(self, **kwargs):
+        super(InstanceProfile, self).__init__(**kwargs)
 
-        self.Type = "AWS::IAM::InstanceProfile"
-        self.LogicalID = LogicalID
-        self.Path = Path
-        self.Roles = Roles
-        self.Capabilities = "CAPABILITY_IAM"
-        self.doc = {
-                "Resources": {
-                    self.LogicalID: {
-                        "Type": self.Type,
-                        "Properties": {
-                            "Path": self.Path,
-                            "Roles": self.Roles,
-                            }
-                        }
-                    }
-                }
