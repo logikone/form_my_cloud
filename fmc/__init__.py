@@ -1,6 +1,7 @@
 from fmc.resources import (
         ElasticBeanstalk,
         IAM,
+        DynamoDB,
         )
 
 from fmc.format import (
@@ -25,6 +26,8 @@ def resource(name):
         return ElasticBeanstalk
     if name == "IAM":
         return IAM
+    if name == "DynamoDB":
+        return DynamoDB
 
     raise ValueError("Unknown Resource Type: {0}".format(
         name))
