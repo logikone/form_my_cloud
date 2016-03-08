@@ -16,9 +16,15 @@ def RequiredArguments(required_args):
 def RequiresOneOf(required_args):
     def check_requirements(func):
         def wrapper(*args, **kwargs):
+            if "Properties" not in kwargs:
+                kwargs["Properties"] = {}
+
             count = 0
-            if [k for k in required_args if k in kwargs]: 
-                count += 1
+            for req in required_args:
+                if req in kwargs:
+                    kwargs["Properties"][req] = kwargs[req]
+                    count += 1
+
             if count < 1:
                 raise MissingOneOf(required_args)
             return func(*args, **kwargs)
@@ -28,7 +34,8 @@ def RequiresOneOf(required_args):
 def RequiredProperties(required):
     def add_required_props(func):
         def wrapper(*args, **kwargs):
-            kwargs["Properties"] = {}
+            if "Properties" not in kwargs:
+                kwargs["Properties"] = {}
 
             for opt in required:
                 if opt not in kwargs:
@@ -42,7 +49,8 @@ def RequiredProperties(required):
 def OptionalProperties(optional):
     def add_optional_props(func):
         def wrapper(*args, **kwargs):
-            kwargs["Properties"] = {}
+            if "Properties" not in kwargs:
+                kwargs["Properties"] = {}
 
             for opt in optional:
                 if opt in kwargs:
