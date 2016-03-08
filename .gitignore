@@ -6,3 +6,5 @@ fmc.egg-info
 .tox
 build/
 .env
+.coverage
+.noseids
