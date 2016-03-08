@@ -16,3 +16,5 @@ class Application(ResourceBase):
         ])
     def __init__(self, **kwargs):
         super(Application, self).__init__(**kwargs)
+
+#! vim: ts=4 sw=4 ft=python expandtab:
