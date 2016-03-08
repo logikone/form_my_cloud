@@ -11,6 +11,7 @@ from fmc.format import (
 from fmc.client import Client
 from fmc.description import Description
 from fmc.metadata import MetaData
+from fmc.parameters import Parameter
 
 def client():
     return Client
@@ -20,6 +21,9 @@ def description(description):
 
 def metadata(**kwargs):
     return MetaData(**kwargs)
+
+def parameter(**kwargs):
+    return Parameter(**kwargs)
 
 def resource(name):
     if name == "ElasticBeanstalk":
