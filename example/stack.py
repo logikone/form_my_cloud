@@ -9,6 +9,7 @@ except:
 name = "SampleFMCStack"
 
 description = fmc.description("Sample FMC Stack")
+
 metadata = fmc.metadata(
         Instances = {
             "Description": "Description of Instances",
@@ -117,9 +118,7 @@ eb_env = eb.Environment(
             ]
         )
 
-stack = [
-        description,
-        metadata,
+resources = [
         iam_role,
         iam_policy,
         iam_instance_profile,

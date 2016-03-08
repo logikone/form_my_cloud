@@ -17,21 +17,96 @@ class Client(Base):
         return valid
 
     @classmethod
-    def _combine_dicts(Class, configs):
+    def _combine_dicts(Class, stack):
         self = Class()
         combined_dict = {}
-        for config in configs:
+
+        # Add Template Version
+        try:
+            version = stack.version
+        except:
+            import fmc
+            version = fmc.format("Version")()
+        finally:
             self._update_dict(
                     combined_dict,
-                    config.representation(),
+                    version.representation()
                     )
+
+        # Add Description
+        try:
+            self._update_dict(
+                    combined_dict,
+                    stack.description.representation()
+                    )
+        except:
+            pass
+
+        # Add MetaData
+        try:
+            self._update_dict(
+                    combined_dict,
+                    stack.metadata.representation()
+                    )
+        except:
+            pass
+
+        # Add Parameters
+        try:
+            for parameter in stack.parameters:
+                self._update_dict(
+                        combined_dict,
+                        parameter.representation()
+                        )
+        except:
+            pass
+
+        # Add Mappings
+        try:
+            for mapping in stack.mappings:
+                self._update_dict(
+                        combined_dict,
+                        mapping.representation()
+                        )
+        except:
+            pass
+
+        # Add Conditions
+        try:
+            for condition in stack.conditions:
+                self._update_dict(
+                        combined_dict,
+                        condition.representation()
+                        )
+        except:
+            pass
+
+        # Add Resources
+        try:
+            for resource in stack.resources:
+                self._update_dict(
+                        combined_dict,
+                        resource.representation(),
+                        )
+        except:
+            pass
+
+        # Add Outputs
+        try:
+            for output in stack.outputs:
+                self._update_dict(
+                        combined_dict,
+                        output.representation()
+                        )
+        except:
+            pass
 
         return combined_dict
 
     @classmethod
     def validate_stack(Class, stack):
         self = Class()
-        combined_dict = self._combine_dicts(stack.stack)
+        combined_dict = self._combine_dicts(stack)
         serialized_dict = self.serialize(combined_dict)
 
         valid = self._validate_template(
@@ -43,7 +118,7 @@ class Client(Base):
     @classmethod
     def create_stack(Class, stack):
         self = Class()
-        combined_dict = self._combine_dicts(stack.stack)
+        combined_dict = self._combine_dicts(stack)
         Capabilities = []
 
         for s in stack.stack:
@@ -75,6 +150,6 @@ class Client(Base):
     @classmethod
     def stack_representation(Class, stack):
         self = Class()
-        return self._combine_dicts(stack.stack)
+        return self._combine_dicts(stack)
 
 #! vim: ts=4 sw=4 ft=python expandtab:
