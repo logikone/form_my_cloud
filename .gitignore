@@ -3,3 +3,6 @@
 blah.py
 .eggs
 fmc.egg-info
+.tox
+build/
+.env

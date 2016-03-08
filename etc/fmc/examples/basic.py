@@ -1,10 +1,4 @@
-import os
-import sys
-try:
-    import fmc
-except:
-    sys.path.append(os.getcwd())
-    import fmc
+import fmc
 
 name = "SampleFMCStack"
 
@@ -128,6 +122,6 @@ resources = [
         ]
 
 if __name__ == "__main__":
-    for s in stack:
-        print s
-        print s.representation()
+    for r in resources:
+        print r
+        print r.representation()
