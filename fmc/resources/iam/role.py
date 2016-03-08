@@ -22,3 +22,4 @@ class Role(ResourceBase):
     def __init__(self, **kwargs):
         super(Role, self).__init__(**kwargs)
 
+#! vim: ts=4 sw=4 ft=python expandtab:
