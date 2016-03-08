@@ -1,15 +1,22 @@
 from fmc.resources.base import ResourceBase
-from fmc.decorators import RequiredArguments
+from fmc.decorators import (
+        RequiredArguments,
+        OptionalProperties
+        )
 
 class Application(ResourceBase):
 
-    @RequiredArguments(["LogicalID"])
-    def __init__(self, LogicalID=None, ApplicationName=None, Description=None):
+    @RequiredArguments([
+        "LogicalID"
+        ])
+    @OptionalProperties([
+        "ApplicationName",
+        "Description"
+        ])
+    def __init__(self, **kwargs):
 
-        self.LogicalID = LogicalID
-        self.ApplicationName = ApplicationName
-        self.Description = Description
-        self.Properties = {}
+        self.LogicalID = kwargs["LogicalID"]
+        self.Properties = kwargs["Properties"]
         self.Type = "AWS::ElasticBeanstalk::Application"
         self.doc = {
                 "Resources": {
@@ -19,11 +26,6 @@ class Application(ResourceBase):
                         }
                     }
                 }
-        if self.ApplicationName:
-            self.Properties["ApplicationName"] = self.ApplicationName
-
-        if self.Description:
-            self.Properties["Description"] = self.Description
 
         if len(self.Properties.keys()) == 0:
             print self.doc
