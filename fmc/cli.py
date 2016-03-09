@@ -1,14 +1,9 @@
 import os
 import sys
 import argparse
-import imp
 import json
-
-try:
-    import fmc
-except:
-    sys.path.append(os.getcwd())
-    import fmc
+import re
+import fmc
 
 client = fmc.client()
 
@@ -18,6 +13,8 @@ def get_options():
     shared_args = argparse.ArgumentParser(add_help=False)
     shared_args.add_argument("stack", type=str,
             help="Path to stack file realive to cwd.")
+    shared_args.add_argument("--path", type=str, nargs="?", default="/etc/fmc/stacks",
+            help="Path to search for stack, if stack not in default path.")
 
     subparsers = parent_parser.add_subparsers(dest="operation")
 
@@ -40,10 +37,29 @@ def _dumps(doc):
 def main():
     options = get_options()
 
+    r = re.compile("^/")
+    if r.match(options.path):
+        sys.path.append(options.path)
+    else:
+        sys.path.append(
+                "{0}/{1}".format(
+                    os.getcwd(),
+                    options.path
+                    )
+                )
+
     try:
-        stack = imp.load_source("stack", options.stack)
+        name, fromlist = options.stack.split(".", 1)
+        stack = __import__(
+                options.stack,
+                globals(),
+                locals(),
+                [fromlist]
+                )
     except Exception as e:
-        sys.exit(e)
+        stack = __import__(
+            options.stack
+            )
 
     if options.operation == "representation":
         try:
