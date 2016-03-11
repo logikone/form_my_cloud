@@ -25,8 +25,8 @@ class Client(Base):
         try:
             version = stack.version
         except:
-            import fmc
-            version = fmc.format("Version")()
+            from fmc.format import Version
+            version = Version()
         finally:
             self._update_dict(
                     combined_dict,
