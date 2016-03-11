@@ -2,9 +2,6 @@ import json
 import collections
 
 class Base(object):
-    def __init__(self):
-        pass
-
     def serialize(self, doc):
         return json.dumps(
                 doc,
