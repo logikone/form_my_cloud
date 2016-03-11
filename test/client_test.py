@@ -3,6 +3,7 @@ from moto import mock_cloudformation
 import fmc
 
 class ClientTestCase(unittest.TestCase):
+    @mock_cloudformation
     def setUp(self):
         eb = fmc.resource("ElasticBeanstalk")
         eb_app = eb.Application(
@@ -20,6 +21,7 @@ class ClientTestCase(unittest.TestCase):
         self.client = fmc.client()
         self.stack_repr = stack_repr
 
+    @mock_cloudformation
     def test_stack_representation(self):
         representation = self.client.stack_representation(
                 self.stack
