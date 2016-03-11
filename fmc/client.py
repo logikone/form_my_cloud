@@ -121,9 +121,9 @@ class Client(Base):
         combined_dict = self._combine_dicts(stack)
         Capabilities = []
 
-        for s in stack.stack:
+        for resource in stack.resources:
             try:
-                Capabilities.append(s.Capabilities)
+                Capabilities.append(resource.Capabilities)
             except:
                 pass
 
