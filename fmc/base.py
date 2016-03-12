@@ -3,12 +3,7 @@ import collections
 
 class Base(object):
     def serialize(self, doc):
-        return json.dumps(
-                doc,
-                sort_keys=True,
-                indent=4,
-                separators=(",", ":"),
-                )
+        return json.dumps(doc)
 
     def _update_dict(self, d, u):
         for k, v in u.iteritems():
