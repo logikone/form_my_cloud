@@ -111,7 +111,7 @@ class Client(Base):
 
         return valid
 
-    def create_stack(self, stack):
+    def create_stack(self, stack, validate=True):
         combined_dict = self._combine_dicts(stack)
         Capabilities = []
 
@@ -121,9 +121,12 @@ class Client(Base):
             except:
                 pass
 
-        template_valid = self._validate_template(
-                self.serialize(combined_dict)
-                )
+        if validate:
+            template_valid = self._validate_template(
+                    self.serialize(combined_dict)
+                    )
+        else:
+            template_valid = True
 
         if template_valid:
             response = self.cf_client.create_stack(
