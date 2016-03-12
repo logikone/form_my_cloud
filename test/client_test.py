@@ -3,14 +3,18 @@ import unittest
 import botocore.session
 from botocore.stub import Stubber
 import fmc
+from fmc.client import Client
 
-class ClientTestCase(unittest.TestCase):
-    def setUp(self):
+class TestClient(Client):
+    def __init__(self):
         session = botocore.session.get_session()
         self.cf_client = session.create_client(
                 "cloudformation",
                 region_name = "us-east-1"
                 )
+
+class ClientTestCase(unittest.TestCase):
+    def setUp(self):
         eb = fmc.resource("ElasticBeanstalk")
         eb_app = eb.Application(
                     LogicalID = "TestApplication"
@@ -24,7 +28,7 @@ class ClientTestCase(unittest.TestCase):
             })
 
         self.stack.resources = [eb_app]
-        self.client = fmc.client()
+        self.client = TestClient()
         self.stack_repr = stack_repr
         self.stubber = Stubber(self.client.cf_client)
 
