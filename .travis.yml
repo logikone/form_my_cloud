@@ -2,7 +2,7 @@ language: python
 python:
     - "2.7"
 install:
-    - pip install --upgrade tox
+    - pip install --upgrade tox python-coveralls
 script:
     - tox -r
 after_success:
