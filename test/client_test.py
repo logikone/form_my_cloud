@@ -6,6 +6,11 @@ import fmc
 
 class ClientTestCase(unittest.TestCase):
     def setUp(self):
+        session = botocore.session.get_session()
+        self.cf_client = session.create_client(
+                "cloudformation",
+                region_name = "us-east-1"
+                )
         eb = fmc.resource("ElasticBeanstalk")
         eb_app = eb.Application(
                     LogicalID = "TestApplication"
