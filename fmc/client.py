@@ -16,9 +16,7 @@ class Client(Base):
 
         return valid
 
-    @classmethod
-    def _combine_dicts(Class, stack):
-        self = Class()
+    def _combine_dicts(self, stack):
         combined_dict = {}
 
         # Add Template Version
@@ -103,9 +101,7 @@ class Client(Base):
 
         return combined_dict
 
-    @classmethod
-    def validate_stack(Class, stack):
-        self = Class()
+    def validate_stack(self, stack):
         combined_dict = self._combine_dicts(stack)
         serialized_dict = self.serialize(combined_dict)
 
@@ -115,9 +111,7 @@ class Client(Base):
 
         return valid
 
-    @classmethod
-    def create_stack(Class, stack):
-        self = Class()
+    def create_stack(self, stack):
         combined_dict = self._combine_dicts(stack)
         Capabilities = []
 
@@ -140,16 +134,12 @@ class Client(Base):
 
         return response
 
-    @classmethod
-    def delete_stack(Class, stack):
-        self = Class()
+    def delete_stack(self, stack):
         return self.cf_client.delete_stack(
                 StackName = stack.name
                 )
 
-    @classmethod
-    def stack_representation(Class, stack):
-        self = Class()
+    def stack_representation(self, stack):
         return self._combine_dicts(stack)
 
 #! vim: ts=4 sw=4 ft=python expandtab:

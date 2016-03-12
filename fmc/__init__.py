@@ -13,8 +13,8 @@ from fmc.description import Description
 from fmc.metadata import MetaData
 from fmc.parameters import Parameter
 
-def client(Class=Client):
-    return Class
+def client():
+    return Client()
 
 def description(description):
     return Description(description)
