@@ -1,4 +1,3 @@
-moto
 nose
 coverage
 python-coveralls
