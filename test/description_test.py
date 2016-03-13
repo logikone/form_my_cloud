@@ -5,6 +5,7 @@ class DescriptionTestCase(unittest.TestCase):
     description = fmc.description("Test Description")
 
     def test_string_repr(self):
+        '''Test Description Object String Representation'''
         representation = "<Description: Test Description>"
 
         self.assertEqual(
@@ -13,6 +14,7 @@ class DescriptionTestCase(unittest.TestCase):
                 )
 
     def test_representation(self):
+        '''Test Description Representation'''
         representation = {
                 "Description": "Test Description"
                 }

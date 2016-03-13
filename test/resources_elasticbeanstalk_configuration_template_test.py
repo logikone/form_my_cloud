@@ -3,7 +3,7 @@ import fmc
 
 eb = fmc.resource("ElasticBeanstalk")
 
-class ApplicationTestCase(unittest.TestCase):
+class ConfigurationTemplateTestCase(unittest.TestCase):
     template = {
             "LogicalID": "Test",
             "ApplicationName": "TestApplication",
@@ -16,21 +16,26 @@ class ApplicationTestCase(unittest.TestCase):
     eb_config_template = eb.ConfigurationTemplate(**template)
 
     def test_instance(self):
+        '''Test ElasticBeanstalk.ConfigurationTemplate Is Proper Instance'''
         self.assertIsInstance(
                 self.eb_config_template,
                 fmc.resources.elasticbeanstalk.ConfigurationTemplate
                 )
 
-    def test_exception(self):
+    def test_missing_argument_exception(self):
+        '''Test ElasticBeanstalk.ConfigurationTemplate Raises MissingArgument'''
         with self.assertRaises(fmc.exceptions.MissingArgument) as cm:
             eb.ConfigurationTemplate()
 
+    def test_missing_one_of_exception(self):
+        '''Test ElasticBeanstalk.ConfigurationTemplate Raises MissingOneOf'''
         with self.assertRaises(fmc.exceptions.MissingOneOf) as cm:
             template = self.template
             template.pop("SolutionStackName")
             eb.ConfigurationTemplate(**template)
 
     def test_str_repr(self):
+        '''Test ElasticBeanstalk.ConfigurationTemplate Object String Representation'''
         representation = "<AWS::ElasticBeanstalk::ConfigurationTemplate: Test>"
 
         self.assertEqual(
@@ -39,6 +44,7 @@ class ApplicationTestCase(unittest.TestCase):
                 )
 
     def test_representation(self):
+        '''Test ElasticBeanstalk.ConfigurationTemplate Representation'''
         representation = {
                 "Resources": {
                     "Test": {

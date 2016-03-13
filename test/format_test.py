@@ -5,6 +5,7 @@ class VersionTestCase(unittest.TestCase):
     version = Version()
 
     def test_str_repr(self):
+        '''Test Format.Version Object String Representation'''
         representation = "<Format.Version: 2010-09-09>"
 
         self.assertEqual(
@@ -13,6 +14,7 @@ class VersionTestCase(unittest.TestCase):
                 )
 
     def test_representation(self):
+        '''Test Format.Version Representation'''
         representation = {
                 "AWSTemplateFormatVersion": "2010-09-09"
                 }

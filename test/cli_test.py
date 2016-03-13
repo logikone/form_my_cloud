@@ -13,12 +13,15 @@ class TestClient(Client):
 
 class CliTestCase(unittest.TestCase):
     def test_get_options(self):
+        '''Test Get Options'''
         self.skipTest("TODO")
 
     def test_main(self):
+        '''Test Main Handler'''
         self.skipTest("TODO")
 
     def tests__dumps(self):
+        '''Test _dumps Serialization Helper'''
         self.skipTest("TODO")
         #result = cli._dumps({
         #    "Foo": "Bar"

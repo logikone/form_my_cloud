@@ -3,10 +3,12 @@ import fmc
 
 class MissingArgumentTestCase(unittest.TestCase):
     def test_raises(self):
+        '''Test Raise MissingArgument'''
         with self.assertRaises(fmc.exceptions.MissingArgument):
             raise fmc.exceptions.MissingArgument("Test")
 
     def test_str_repr(self):
+        '''Test MissingArgument Object String Representation'''
         try:
             raise fmc.exceptions.MissingArgument("Test")
         except fmc.exceptions.MissingArgument as e:
@@ -17,6 +19,7 @@ class MissingArgumentTestCase(unittest.TestCase):
 
 class MissingOneOfTestCase(unittest.TestCase):
     def test_raises(self):
+        '''Test Raise MissingOneOf'''
         with self.assertRaises(fmc.exceptions.MissingOneOf):
             raise fmc.exceptions.MissingOneOf([
                 "Test1",
@@ -25,6 +28,7 @@ class MissingOneOfTestCase(unittest.TestCase):
                 ])
 
     def test_str_repr(self):
+        '''Test MissingOneOf Object String Representation'''
         try:
             raise fmc.exceptions.MissingOneOf([
                 "Test1",

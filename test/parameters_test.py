@@ -26,6 +26,7 @@ class ParameterTestCase(unittest.TestCase):
                 )
 
     def test_representation(self):
+        '''Test Parameter Representation'''
         representation = {
                 "Parameters": {
                     "Test": {
@@ -54,6 +55,7 @@ class ParameterTestCase(unittest.TestCase):
 
 
     def test_exception(self):
+        '''Test Parameter Raises MissingArgument'''
         with self.assertRaises(fmc.exceptions.MissingArgument) as cm:
             fmc.parameter()
 

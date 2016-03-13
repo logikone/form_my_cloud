@@ -22,12 +22,14 @@ class MetaDataTestCase(unittest.TestCase):
                 )
 
     def test_str_repr(self):
+        '''Test Metadata Object String Representation'''
         self.assertEqual(
                 "<MetaData>",
                 str(self.metadata)
                 )
 
     def test_representation(self):
+        '''Test Metadata Representation'''
         representation = {
                 "Metadata": {
                     "Instances": {

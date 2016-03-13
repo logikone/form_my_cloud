@@ -33,6 +33,7 @@ class ClientTestCase(unittest.TestCase):
         self.stubber = Stubber(self.client.cf_client)
 
     def test_stack_representation(self):
+        '''Test Full Stack Representation'''
         representation = self.client.stack_representation(
                 self.stack
                 )
@@ -43,6 +44,7 @@ class ClientTestCase(unittest.TestCase):
                 )
 
     def test_validate_stack(self):
+        '''Test Stack Validation AWS Call'''
         response = {
                 "Parameters": [], 
                 "ResponseMetadata": {
@@ -80,6 +82,7 @@ class ClientTestCase(unittest.TestCase):
                 )
 
     def test_create_stack(self):
+        '''Test Create Stack AWS Call'''
         response = {
                 "StackId": "string"
                 }
@@ -116,6 +119,7 @@ class ClientTestCase(unittest.TestCase):
                 )
 
     def test_delete_stack(self):
+        '''Test Delete Stack AWS Call'''
         response = {
                 "ResponseMetadata": {
                     "HTTPStatusCode": 200,

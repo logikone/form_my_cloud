@@ -13,16 +13,19 @@ class ApplicationVersionTestCase(unittest.TestCase):
             )
 
     def test_instance(self):
+        '''Test ElasticBeanstalk.ApplicationVersion Is Proper Instance'''
         self.assertIsInstance(
                 self.eb_app,
                 fmc.resources.elasticbeanstalk.ApplicationVersion
                 )
 
     def test_exception(self):
+        '''Test ElasticBeanstalk.ApplicationVersion Raises MissingArgument'''
         with self.assertRaises(fmc.exceptions.MissingArgument) as cm:
             eb.ApplicationVersion()
 
     def test_str_repr(self):
+        '''Test ElasticBeanstalk.ApplicationVersion Object String Representation'''
         string_repr = "<AWS::ElasticBeanstalk::ApplicationVersion: Test>"
 
         self.assertEqual(
@@ -31,6 +34,7 @@ class ApplicationVersionTestCase(unittest.TestCase):
                 )
 
     def test_representation(self):
+        '''Test ElasticBeanstalk.ApplicationVersion Representation'''
         representation = {
                 "Resources": {
                     "Test": {

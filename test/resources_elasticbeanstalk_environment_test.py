@@ -23,16 +23,19 @@ class EnvironmentTestCase(unittest.TestCase):
     eb_environment = eb.Environment(**template)
 
     def test_instance(self):
+        '''Test ElasticBeanstalk.Environment Is Proper Instance'''
         self.assertIsInstance(
                 self.eb_environment,
                 fmc.resources.elasticbeanstalk.Environment
                 )
 
     def test_exception(self):
+        '''Test ElasticBeanstalk.Environment Raises MissingArgument'''
         with self.assertRaises(fmc.exceptions.MissingArgument) as cm:
             eb.Environment()
 
     def test_str_repr(self):
+        '''Test ElasticBeanstalk.Environment Object String Representation'''
         representation = "<AWS::ElasticBeanstalk::Environment: Test>"
 
         self.assertEqual(
@@ -41,6 +44,7 @@ class EnvironmentTestCase(unittest.TestCase):
                 )
 
     def test_representation(self):
+        '''Test ElasticBeanstalk.Environment Representation'''
         representation = {
                 "Resources": {
                     "Test": {
