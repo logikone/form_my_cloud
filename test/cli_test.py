@@ -1,7 +1,7 @@
 import json
 import unittest
 from fmc.client import Client
-#from fmc import cli
+from fmc import cli
 
 class TestClient(Client):
     def __init__(self):
@@ -13,8 +13,10 @@ class TestClient(Client):
 
 class CliTestCase(unittest.TestCase):
     def test_get_options(self):
-        '''Test Get Options'''
-        self.skipTest("TODO")
+        '''Test Get Options w/ Args Passed'''
+        result = cli.get_options(["validate", "basic"])
+
+        self.assertTrue(result)
 
     def test_main(self):
         '''Test Main Handler'''
@@ -22,19 +24,18 @@ class CliTestCase(unittest.TestCase):
 
     def tests__dumps(self):
         '''Test _dumps Serialization Helper'''
-        self.skipTest("TODO")
-        #result = cli._dumps({
-        #    "Foo": "Bar"
-        #    })
+        result = cli._dumps({
+            "Foo": "Bar"
+            })
 
-        #expected = json.dumps({
-        #    "Foo": "Bar"
-        #    },
-        #    indent = 4,
-        #    sort_keys = True
-        #    )
+        expected = json.dumps({
+            "Foo": "Bar"
+            },
+            indent = 4,
+            sort_keys = True
+            )
 
-        #self.assertEqual(
-        #        expected,
-        #        result
-        #        )
+        self.assertEqual(
+                expected,
+                result
+                )
