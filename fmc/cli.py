@@ -5,9 +5,7 @@ import json
 import re
 import fmc
 
-client = fmc.client()
-
-def get_options():
+def get_options(args):
     parent_parser = argparse.ArgumentParser()
 
     shared_args = argparse.ArgumentParser(add_help=False)
@@ -23,7 +21,7 @@ def get_options():
     create = subparsers.add_parser("create", parents=[shared_args])
     delete = subparsers.add_parser("delete", parents=[shared_args])
 
-    options = parent_parser.parse_args()
+    options = parent_parser.parse_args(args)
 
     return options
 
@@ -35,7 +33,8 @@ def _dumps(doc):
             )
 
 def main():
-    options = get_options()
+    client = fmc.client()
+    options = get_options(sys.argv[1:])
 
     r = re.compile("^/")
     if r.match(options.path):
@@ -56,10 +55,13 @@ def main():
                 locals(),
                 [fromlist]
                 )
-    except Exception as e:
-        stack = __import__(
-            options.stack
-            )
+    except ImportError as e:
+        try:
+            stack = __import__(
+                options.stack
+                )
+        except ImportError as e:
+            sys.exit(e)
 
     if options.operation == "representation":
         try:
