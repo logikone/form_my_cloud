@@ -55,7 +55,7 @@ def main():
                 locals(),
                 [fromlist]
                 )
-    except ImportError as e:
+    except:
         try:
             stack = __import__(
                 options.stack
@@ -86,8 +86,5 @@ def main():
             print _dumps(client.delete_stack(stack))
         except Exception as e:
             sys.exit(e)
-
-if __name__ == "__main__":
-    main()
 
 #! vim: ts=4 sw=4 ft=python expandtab:
